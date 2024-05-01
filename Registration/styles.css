@@ -1,0 +1,25 @@
+#information_submission{
+    width: 330px;
+    border: 1px solid black;
+}
+
+input{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+label{
+    display: inline-block;
+    width: 105px;
+    padding-left: 15px;
+}
+
+#submission_btn{
+    margin-left: 130px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#userpass{
+    width: 200px;
+}
