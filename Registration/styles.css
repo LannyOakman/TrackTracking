@@ -14,12 +14,16 @@ label{
     padding-left: 15px;
 }
 
-#submission_btn{
+#submission_btn {
     margin-left: 130px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-#userpass{
-    width: 200px;
+#newAccount {
+    margin-left: 100px;
+}
+
+#create_account{
+    margin: 10px;
 }

@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="../Registration/styles.css">
 </head>
 <body>
+    <h1>Event Selection</h1>
     <div id="information_submission">
-    <form action="/registration_form.php" method="post">
-
+    <form action="../time_input.php" method="post">
         <div id="track">
             <input type="checkbox" name="running_events" id="100m">
             <label for="running_events">100m</label>
@@ -39,7 +39,6 @@
             <input type="checkbox" name="field_events" id="hammerThrow">
             <label for="field_events">Hammer Throw</label>
         </div>
-
         <input type="submit" id ="submission_btn" value = "Submit">
     </form>
     </div>
