@@ -9,7 +9,7 @@
     <h1>Track Tracking</h1>
     <h3>Log In</h3>
     
-    <form method="post" action="verification.php">
+    <form method="post" action="login_verification.php">
         <div id="userpass">
             <input type="text" placeholder="Username" name="user">
             <input type="text" placeholder="Password" name="password">

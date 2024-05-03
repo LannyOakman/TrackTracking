@@ -27,3 +27,13 @@ label{
 #create_account{
     margin: 10px;
 }
+
+.eventform{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.time_login{
+    margin: 10px;
+}

@@ -8,5 +8,8 @@
 <body>
     <h1>Error</h1>
     <h2>Username already in use</h2>
+    <a href="../Registration/registration.php">
+        <button>Create Account</button>
+    </a>
 </body>
 </html>

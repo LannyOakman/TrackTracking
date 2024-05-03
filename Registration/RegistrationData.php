@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-
+    include '../Functions/insertIntoTable.php';
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -41,21 +41,19 @@
     if ($ID_Used){
         header('Location: ../Other/error_page.php');
     }
+    
     //sql statement
-    $sql = "
-    INSERT INTO UserDetails
-        (Username, Password, FirstName, LastName, DateOfBirth, PhoneNumber, City, State, GraduationYear)
-    VALUES
-        ('$user_name', '$user_password', '$name_first', '$name_last', '$dob', '$phone', '$city', '$state', '$graduation');";
-
-    //check if record was made
-    if (!(mysqli_query($conn, $sql))){
-        echo "Record not Created";
-    }
+    insertIntoTable(
+    $conn,
+    'UserDetails', 'Username', 'Password', 'FirstName', 'LastName',
+    'DateOfBirth', 'PhoneNumber', 'City', 'State', 'GraduationYear',
+    $user_name,$user_password, $name_first, $name_last, $dob, $phone,
+    $city, $state, $graduation
+    );
 
     $conn->close();
 
-    // header('Location: ../Front/front.php');
+    header('Location: ../Front/front.php');
 ?>
 <h3>Account Created</h3>
 <a href="../Front/front.php">
