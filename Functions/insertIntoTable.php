@@ -1,38 +1,24 @@
 <?php
-    function insertIntoTable($db_link, $db_table, ...$columns_and_values){
+    function insertIntoTable($db_link, $db_table, ...$values){
         
-        if (sizeof($columns_and_values) % 2 != 0) return('');
-        
-        $columns = [];
-        $values = [];
+        $value_str = '';
 
-        for ($i = 0; $i < sizeof($columns_and_values); $i++){
-            if ($i<sizeof($columns_and_values)/2){
-                array_push($columns, $columns_and_values[$i]);
+        foreach ($values as $val){
+            if($val == 'NULL'){
+                $value_str = $value_str . $val . ', ';
             }else{
-                array_push($values, $columns_and_values[$i]);
+                $value_str = $value_str . "'" . (string)$val . "'" . ', ';
             }
         }
 
-        $column_str = '';
-        $values_str = '';
-
-        foreach ($columns as $val){
-            $column_str = $column_str . (string)$val .', ';
-        }
-        
-        foreach ($values as $val){
-            $values_str = $values_str . "'" . (string)$val . "'" . ', ';
-        }
-        
-        $column_str = substr($column_str, 0, -2);
-        $values_str = substr($values_str, 0, -2);
+        $value_str = substr($value_str, 0, -2);
 
         $sql = "
-            INSERT INTO $db_table
-                ($column_str)
-            Values
-                ($values_str);";
+        INSERT INTO
+            $db_table
+        VALUES
+            ($value_str);";
+        
         mysqli_query($db_link, $sql);
     }
 ?>

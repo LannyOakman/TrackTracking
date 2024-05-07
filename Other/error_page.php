@@ -7,9 +7,9 @@
 </head>
 <body>
     <h1>Error</h1>
-    <h2>Username already in use</h2>
-    <a href="../Registration/registration.php">
-        <button>Create Account</button>
+    <h2>Please review inputted information</h2>
+    <a href="../Front/front.php">
+        <button>Main</button>
     </a>
 </body>
 </html>

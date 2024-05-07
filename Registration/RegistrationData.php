@@ -31,9 +31,9 @@
 
     $sql = "
     SELECT
-        * From UserDetails
+        * From user_details
     WHERE
-        Username = '$user_name';";
+        id_username = '$user_name';";
 
     $result = mysqli_query($conn, $sql);
     $ID_Used = mysqli_num_rows($result);
@@ -43,18 +43,14 @@
     }
     
     //sql statement
-    insertIntoTable(
-    $conn,
-    'UserDetails', 'Username', 'Password', 'FirstName', 'LastName',
-    'DateOfBirth', 'PhoneNumber', 'City', 'State', 'GraduationYear',
-    $user_name,$user_password, $name_first, $name_last, $dob, $phone,
-    $city, $state, $graduation
-    );
+    insertIntoTable($conn,$user_details, $user_name,$user_password, $name_first,
+                    $name_last, $dob, $phone, $city, $state, $graduation);
 
     $conn->close();
 
     header('Location: ../Front/front.php');
 ?>
+
 <h3>Account Created</h3>
 <a href="../Front/front.php">
         <button>Log in</button>

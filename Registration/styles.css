@@ -37,3 +37,11 @@ label{
 .time_login{
     margin: 10px;
 }
+#teamform{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+#submission{
+    padding-left: 50px;
+}

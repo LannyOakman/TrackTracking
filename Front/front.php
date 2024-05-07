@@ -7,17 +7,21 @@
 </head>
 <body>
     <h1>Track Tracking</h1>
-    <h3>Log In</h3>
-    
-    <form method="post" action="login_verification.php">
-        <div id="userpass">
-            <input type="text" placeholder="Username" name="user">
-            <input type="text" placeholder="Password" name="password">
-            <input type="submit" value="Submit">   
-        </div>
-    </form>
+
     <a href="../Registration/registration.php">
-        <button id="create_account">Create Account</button>
+        <button>Create Account</button>
+    </a>
+
+    <a href="../team/team_creation.php">
+        <button>Create Team</button>
+    </a>
+
+    <a href="../meet/meet_creation_front.php">
+        <button>Create a Meet</button>
+    </a>
+    
+    <a href="../team/manage.php">
+        <button>Manage Team</button>
     </a>
 </body>
 </html>

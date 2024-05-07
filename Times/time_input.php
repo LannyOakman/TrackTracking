@@ -3,6 +3,7 @@
 <?php
     include '../Functions/eventsToHTML.php';
     include '../Functions/eventList.php';
+    include '../Functions/listMeet.php';
 ?>
 
 <html lang="en">
@@ -16,9 +17,16 @@
     <h1>Enter Performance:</h1>
     <form action="time_processing.php" method="post">
         <div class="time_login">
-            <input type="text" placeholder="Username" name="user">
-            <input type="text" placeholder="Password" name="password">  
-        </div>
+            <input type="text" placeholder="Coach Username" name="coach">
+            <input type="text" placeholder="Athlete Username" name="athlete">
+            <input type="text" placeholder="Team Name" name="team">
+            <select name="events" id="events">
+            <?php
+                listMeet();
+            ?>
+            </select>        
+        </div> 
+
         <div class="eventform">
         <?php
             foreach(EVENT_LIST as $event){
