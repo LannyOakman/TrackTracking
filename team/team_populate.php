@@ -9,9 +9,23 @@
     $state = $_POST['state'];
     $country = $_POST['country'];
 
-    $used = existsInTableColumn($conn, "user_details", "id_username", $coach_name);
-    if(!$used){
-        header('Location: ../Registration/registration.php');
+    $errors = '';
+
+    if ($coach_name == '' || $team_name == '' || $city == '' || $state == '' || $country == ''){
+        echo 'Please fill out all fields';
+        exit;
+    }
+
+    if (!existsInTableColumn($conn, "user_details", "id_username", $coach_name)){
+        $errors = $errors . 'user does not exist, ';
+    }
+    
+    if(existsInTableColumn($conn, 'team_table', 'name', $team_name)){
+        $errors = $errors . 'team name already used';
+    }
+
+    if ($errors != ''){
+        echo $errors;
         exit;
     }
 
@@ -40,5 +54,6 @@
     ";
     
     $conn -> query($sql);
-    header("Location: ../Other/success_page.php");
+    
+    echo("Success");
 ?>

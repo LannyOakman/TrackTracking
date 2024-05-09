@@ -9,71 +9,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-        $("#check").click(function(){
-            $.post("../Registration/registration_validation.php",
-        {
-            username: $("#username").text(),
-            password: $("#password").text(),
-            name_first: $("#name_first").text(),
-            name_last: $("#name_last").text(),
-            dob: $("#dob").text(),
-            phone: $("#phone").text(),
-            city: $("#city").text(),
-            state: $("#state").text(),
-            graduation: $("#graduation").text()
-        },
-            function(data, status){
-                alert(status);
-            });
-        });
-    });
-</script>
-</head>
+        $("#submission_btn").click(function(){
+            let html_collection = document.getElementsByClassName('registration');
+            let class_arr = Array.from(html_collection);
 
-
-
-<script>
-    function validateReg(){
-        let html_collection = document.getElementsByClassName('registration');
-        let class_arr = Array.from(html_collection);
-        // let xml_str = '?';
-        for(let i = 0; i < class_arr.length; i++){
-            if (class_arr[i].value == ''){
-                document.getElementById('error').innerHTML = "Please fill out all fields";
-                return false;
+            for(let i = 0; i < class_arr.length; i++){
+                if (class_arr[i].value == ''){
+                    document.getElementById('return_text_reg').innerHTML = "Please fill out all fields";
+                    return;
+                }
             }
-            // xml_str += class_arr[i].getAttribute("name") + '=' + class_arr[i].value + '&';
-        }
-        // xml_str = xml_str.slice(0,-1);
-        // // let formData = new FormData(documnet.getElementById("reg"));
-        // let xmlthttp = new XMLHttpRequest();
-        // xmlthttp.onreadystatechange = function (){
-        //     if(this.readyState == 4 && this.status == 200){
-        //         document.getElementById("error").innerHTML = this.responseText
-        //     }
-        // };
-        // xmlthttp.open("GET", "../Registration/registration_validation.php" + xml_str, true);
-        // xmlhttp.send();
-        return true;
-    }
-</script>
 
-
-<body>
-
-    <!-- <script>
-        // let class_arr = Array.from(document.getElementsByClassName('registration'));
-        // let post_str = '';
-        // for (let i = 0; i < class_arr.length; i++){
-        //     post_str += class_arr[i].getAttribute("name") + '=' + "'" + class_arr[i].value + "'" + ',';
-        // }
-        // post_str = post_str.slice(0,-1);
-        $("label").click(function(){
-            alert('test');
-        });
-        $("#phone1").click(function(){
-        console.log('test');
-        $.post("registration_validation.php",
+            $.post("../Registration/registration_validation.php",
         {
             username: $("#username").val(),
             password: $("#password").val(),
@@ -85,16 +32,19 @@
             state: $("#state").val(),
             graduation: $("#graduation").val()
         },
-        function(data, status){
-            alert(data);
+            function(data, status){
+                $('#return_text_reg').text(data);
+                }
+            );
         });
-        // return false
-        });
-    </script> -->
+    });
+</script>
 
+</head>
+<body>
     <h1>Create Account</h1>
     <div id="information_submission">
-    <form method="post" action="RegistrationData.php" onsubmit='return validateReg()' name="reg">
+    <form method="post" name="reg" id='registration_form'>
         <label for="username">Username</label>         
         <input type="text" id="username" placeholder="Username" name="username" class ='registration'><br>
         <label for="password">Password</label>       
@@ -113,11 +63,11 @@
         <input type="text" id="state" placeholder="state" name="state" class='registration'><br>
         <label for="graduation">Graduation Year</label>
         <input type="number" id="graduation" placeholder="20XX" name="graduation" class='registration'><br>
-        <input type="submit" id ="submission_btn" value = "Submit">
     </form>
+    <button id="submission_btn">Submit</button>
     </div>
-    <button id="check">check</button>
-    <p id="error"></p>
+    
+    <p id="return_text_reg"></p>
     <a href="../Front/front.php">
             <button>Back</button>
     </a>
