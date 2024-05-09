@@ -13,14 +13,16 @@
     <form action="../Times/time_input.php" method="post">
         <?php
             foreach(EVENT_LIST as $event){
-                echo(
-                "<input type='checkbox' name='$event' id='$event' value ='$event'>
+                echo("
+                <input type='checkbox' name='$event' id='$event' value ='$event'>
                 <label for='$event'>$event</label>
                 ");}
         ?>
         <input type="submit" id ="submission_btn" value = "Submit">
     </form>
     </div>
-
+    <a href="../team/manage.php">
+            <button>Back</button>
+    </a>
 </body>
 </html>

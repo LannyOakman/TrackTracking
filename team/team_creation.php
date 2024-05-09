@@ -33,8 +33,8 @@
         </div>
         <p id="error"></p>
         </form>
-        <a href="../Registration/registration.php">
-            <button>Create account</button>
+        <a href="../Front/front.php">
+            <button>Back</button>
         </a>
 
 </body>

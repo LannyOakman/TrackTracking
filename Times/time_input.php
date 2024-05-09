@@ -35,6 +35,9 @@
         ?>
         <input type="submit" value="Submit">
     </form>
-
+    <br>
+    <a href="../Events/events.php">
+        <button class='back_btn'>Back</button>
+    </a>
 </body>
 </html>

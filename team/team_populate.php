@@ -1,11 +1,7 @@
 <?php
     include '../Functions/insertIntoTable.php';
     include '../Functions/existsInTableColumn.php';;
-    $servername = "localhost";
-    $username = "lanny1";
-    $password = "test123";
-    $db = 'tracking';
-    $conn = new mysqli($servername, $username, $password, $db);
+    include '../Other/sql_connection.php';
 
     $coach_name = $_POST['coach_name'];
     $team_name = $_POST['team_name'];
@@ -14,7 +10,7 @@
     $country = $_POST['country'];
 
     $used = existsInTableColumn($conn, "user_details", "id_username", $coach_name);
-    if($used){
+    if(!$used){
         header('Location: ../Registration/registration.php');
         exit;
     }
@@ -44,5 +40,5 @@
     ";
     
     $conn -> query($sql);
-    header("Location: ../Front/front.php");
+    header("Location: ../Other/success_page.php");
 ?>

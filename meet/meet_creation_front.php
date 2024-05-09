@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Meet</title>
+    <link rel="stylesheet" href="../Registration/styles.css">
 </head>
 <body>
     <h1>Create a Meet</h1>
@@ -11,14 +12,11 @@
     <input type="text" placeholder = 'Coach Username' name = 'coach' id="coach">
     <input type="text" placeholder = 'Team Name' name = 'team' id="team">
     <input type="text" placeholder = 'Meet Name' name = 'meet' id="meet">
-    <input type="text" placeholder='Date: YYYY-MM-DD'name = 'date' id="date">
-    <select name="event_list" id="event_list">
-    <?php
-        include '../Functions/listMeet.php';
-        listMeet();
-    ?>
-    </select>
+    <input type="date" placeholder='YYYY-MM-DD'name = 'date' id="date">
     <input type="submit">
     </form>
+    <a href="../Front/front.php">
+            <button>Back</button>
+    </a>
 </body>
 </html>

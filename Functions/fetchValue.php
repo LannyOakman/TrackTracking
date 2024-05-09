@@ -1,5 +1,4 @@
 <?php
-    include '../Functions/existsInTableColumn.php';
     function fetchValue($sql_conn, $sql_table, $unkown_column, $known_column, $known_value){
     if (!existsInTableColumn($sql_conn, $sql_table, $known_column, $known_value)) return 0;
     $sql = "

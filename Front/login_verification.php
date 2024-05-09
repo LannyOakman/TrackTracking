@@ -1,13 +1,6 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
     include '../Functions/existsInTableColumn.php';
-    $servername = "localhost";
-    $username = "lanny1";
-    $password = "test123";
-    $db = 'tracking';
-    $conn = new mysqli($servername, $username, $password, $db);
+    include '../Other/sql_connection.php';
     
     $user_username = $_POST['user'];
     $user_expected_password = $_POST['password'];

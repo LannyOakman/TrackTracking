@@ -1,14 +1,8 @@
 <?php
 include "../Functions/fetchValue.php";
 include "../Functions/insertIntoTable.php";
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-    $servername = "localhost";
-    $username = "lanny1";
-    $password = "test123";
-    $db = 'tracking';
-    $conn = new mysqli($servername, $username, $password, $db);
+include '../Other/sql_connection.php';
+include '../Functions/existsInTableColumn.php';
 
     $athlete = $_POST['athlete'];
     $coach = $_POST['coach'];
@@ -37,4 +31,5 @@ error_reporting(E_ALL);
         ";
         $conn -> query($sql);
     }
+    header('Location: ../Other/success_page.php');
 ?>

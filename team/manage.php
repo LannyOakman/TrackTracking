@@ -13,5 +13,9 @@
     <a href="../team/add_drop_front.php">
         <button>Manage Members</button>    
     </a>
+    <br>
+    <a href="../Front/front.php">
+            <button>Back</button>
+    </a>
 </body>
 </html>

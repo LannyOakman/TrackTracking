@@ -37,6 +37,10 @@
         <input type="submit" value="drop" name = "drop">         
         </div>
     </form>
+    <br>
+    <a href="../team/manage.php">
+            <button>Back</button>
+    </a>
     <p id="error"></p>
 </body>
 </html>

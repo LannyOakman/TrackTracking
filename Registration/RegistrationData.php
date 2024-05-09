@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <?php
     include '../Functions/insertIntoTable.php';
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    $servername = "localhost";
-    $username = "lanny1";
-    $password = "test123";
-    $db = 'tracking';
+    include '../Other/sql_connection.php';
     
     $user_name = $_POST['username'];
     $user_password = $_POST['password'];
@@ -43,16 +36,10 @@
     }
     
     //sql statement
-    insertIntoTable($conn,$user_details, $user_name,$user_password, $name_first,
+    insertIntoTable($conn,'user_details', $user_name,$user_password, $name_first,
                     $name_last, $dob, $phone, $city, $state, $graduation);
 
     $conn->close();
 
-    header('Location: ../Front/front.php');
+    header('Location: ../Other/success_page.php');
 ?>
-
-<h3>Account Created</h3>
-<a href="../Front/front.php">
-        <button>Log in</button>
-</a>
-</html>
