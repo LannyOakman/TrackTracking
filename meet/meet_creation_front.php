@@ -31,6 +31,7 @@
         });        
     </script>
 </head>
+
 <body>
     <h1>Create a Meet</h1>
     <form id = 'meet_form'>

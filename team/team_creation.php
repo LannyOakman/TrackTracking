@@ -24,7 +24,7 @@
                     },
                     error: function(xhr, status, error){
                         alert('Form not successful');
-                        consol.error(error);
+                        console.error(error);
                     }
                 })
             });

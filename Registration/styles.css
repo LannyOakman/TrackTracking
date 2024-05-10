@@ -1,4 +1,4 @@
-#information_submission{
+#event_form_submission{
     width: 330px;
     border: 1px solid black;
 }
@@ -46,5 +46,13 @@ label{
     padding-left: 50px;
 }
 .back_btn{
-    margin:10px;
+    margin-top: 10px;
+    /* margin:10px; */
+}
+.manage_team_login{
+    display: inline;
+}
+
+#submit_event_form{
+    margin-left: 130px;
 }

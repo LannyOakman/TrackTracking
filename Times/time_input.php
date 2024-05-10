@@ -24,7 +24,7 @@
             <?php
                 listMeet();
             ?>
-            </select>        
+            </select>
         </div> 
 
         <div class="eventform">

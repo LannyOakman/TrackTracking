@@ -37,17 +37,18 @@
     }
 
     if (existsInTableColumn($conn, 'meet', 'meet_name', $meet_name)){
-        $response_str = $response_str . 'meet already exists.';
+        $response_str = $response_str . 'meet already exists, ';
     }
     
     if($response_str != ''){
+        $response_str = substr($response_str, 0, -2);
         echo $response_str;
         exit;
     }
+    
     $id_team = fetchValue($conn, 'team_table', 'id_team', 'name', $team_name);
 
     insertIntoTable($conn, 'meet', 'NULL', $id_team, $meet_name, $date);
 
     echo 'Success';
-    // header('Location: ../Front/front.php');
 ?>
