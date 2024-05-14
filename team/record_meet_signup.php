@@ -24,15 +24,42 @@
 
     $count = 0;
 
+    $error_str = '';
+
     for ($i = 0; $i < sizeof(EVENT_LIST); $i++){
         if (isset($_POST[EVENT_LIST[$i]])){
-            insertIntoTable($conn, 'meet_user_signup', 'NULL', $id_affiliation_user, ($i + 2));
+            $event_index = $i + 2;
+            $sql = "
+                SELECT
+                    *
+                FROM
+                    meet_user_signup
+                WHERE
+                    id_meet = '$meet_id'
+                AND
+                    id_affiliation_user = '$id_affiliation_user'
+                AND
+                    id_event = '$event_index'
+            ";
+            $result = $conn -> query($sql) -> fetch_all();
+
+            if(!$result){
+                insertIntoTable($conn, 'meet_user_signup', 'NULL', $meet_id, $id_affiliation_user, $event_index);
+            }else{
+                $error_str = $error_str . EVENT_LIST[$i] . ', ';
+            }
+
             $count++;
         }
     }
+    if ($error_str != ''){
+        $error_str = substr($error_str, 0, -2);
+        $error_str = $error_str . ' has already been submitted';
+        echo $error_str;
+    }
 
     if(!$count){
-        echo 'Please select a meet';
+        echo 'Please select an event';
         exit;
     }
 ?>

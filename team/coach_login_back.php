@@ -9,9 +9,13 @@
 
     $sql="
     SELECT
-        id_team, name
+        team_table.id_team, team_table.name
     FROM
-        team_user_join
+        team_table
+    INNER JOIN
+        affiliation_user
+    ON
+        team_table.id_team = affiliation_user.id_team
     WHERE
         id_username = '$coach'
     AND

@@ -9,7 +9,7 @@
         $year = ((int)date("Y")) - 1;
         $sql="
         SELECT
-            meet_name
+            meet_name, id_meet
         FROM
             meet
         WHERE
@@ -17,9 +17,8 @@
         ";
 
         $result = $conn -> query($sql)-> fetch_all();
-        foreach ($result as $item){
-            $item = $item[0];
-            echo("<option value='$item'>$item</option>");
+        foreach ($result as $row){
+            echo("<option value='$row[1]'>$row[0]</option>");
         }
     }
 ?>
