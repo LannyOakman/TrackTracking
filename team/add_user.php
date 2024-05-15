@@ -13,7 +13,7 @@
         $user_id = $_POST['add_user_input'];
         $team_id = $_POST['team_id_add_user'];
         $role = $_POST['role'];
-
+        
         if(!existsInTableColumn($conn, 'user_details', 'id_username', $user_id)){
             echo 'User does not exist';
             exit;

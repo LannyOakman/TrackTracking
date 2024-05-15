@@ -6,6 +6,7 @@
     <title>Manage Team</title>
     <link rel="stylesheet" href="../Registration/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <?php
     include '../Functions/eventList.php';
     include '../Functions/listMeet.php';
@@ -175,9 +176,6 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-                        if(response === 'success'){
-                            $('#add_user').hide();
-                        }
                         $('#return_text_manage_login').text(response);
                     },
                     error: function(xhr, status, error){
@@ -362,7 +360,8 @@
                     success: function(response){
                         $('#return_text_manage_login').text(response);
                         if (response === 'success'){
-                            $('#record_performance').hide();
+                            $('#running_input').hide();
+                            $('#field_input').hide();
                         }
                     },
                     error: function(xhr, status, error){
@@ -381,7 +380,7 @@
         <form id="manage_team_login_form">
         <input type="text" name="coach_username" placeholder="Coach Username" class="manage_team_login">
         </form>
-        <button id="submit_login_manage" class="manage_team_login">Submit</button>     
+        <button id="submit_login_manage" class="btn btn-outline-primary">Submit</button>     
     </div>
 
     <p id="return_text_manage_login"></p>
