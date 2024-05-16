@@ -28,7 +28,6 @@
         array_push($first_name,$row[2]);
         array_push($last_name,$row[3]);
     }
-    
     $arr_str = implode(',', $id_user) . ';' . implode(',', $first_name) . ';' . implode(',', $last_name);
     
     echo $arr_str;

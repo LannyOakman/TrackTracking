@@ -1,16 +1,19 @@
 <?php
-    const EVENT_LIST = [
-    '100m',
-    '200m',
-    '400m',
-    '800m',
-    '1600m',
-    '3200m',
-    'High_Jump',
-    'Long_Jump',
-    'Shotput',
-    'Discus',
-    'Javelin',
-    'Hammer_Throw'
-];
+    include '../Other/sql_connection.php';
+
+    $EVENT_LIST = [];
+
+    $sql = "
+    SELECT
+        event
+    FROM
+        event_list;
+    ";
+
+    $result = $conn -> query($sql) -> fetch_all();
+
+    foreach($result as $event){
+        $arr = [str_replace(' ', '_', strtolower($event[0])), $event[0],];
+        array_push($EVENT_LIST, $arr);
+    }
 ?>

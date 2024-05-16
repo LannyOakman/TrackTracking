@@ -2,6 +2,7 @@
     include '../Other/sql_connection.php';
 
     $meet = $_POST['review_meet_selection'];
+
     $sql="
     SELECT
 	performances.performance_1
@@ -11,9 +12,12 @@
         meet_user_signup
     ON
         meet_user_signup.id_meet_user_signup = performances.id_meet_user_signup
-    WHERE meet_user_signup.id_meet = '$meet'
+    WHERE
+        meet_user_signup.id_meet = '$meet'
     ";
+
     $result = $conn -> query($sql) -> fetch_all();
+
     if ($result){
         $sql = "
         SELECT
@@ -49,6 +53,7 @@
         ORDER BY
             event_list.id_event;
         ";
+
         $html_str ="
         <table id='meet_review_table' class='table'>
             <tr>
@@ -93,6 +98,7 @@
         ORDER BY
             event_list.id_event;
         ";
+
         $html_str ="
         <table id='meet_review_table' class='table'>
             <tr>
@@ -107,6 +113,12 @@
 
     
     $result = $conn -> query($sql) -> fetch_all();
+
+    /*
+
+    I should have used DataTables.
+    
+    */
 
     foreach($result as $row){
         $html_str .= "<tr>";

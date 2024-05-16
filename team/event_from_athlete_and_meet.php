@@ -38,10 +38,6 @@
 
     $result = $conn -> query($sql)  -> fetch_all();
 
-
-
-    
-
     $event_id_list = [];
     $event_name_list = [];
 

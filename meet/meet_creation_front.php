@@ -14,6 +14,7 @@
                 let form = document.getElementById('meet_form');
                 let form_data = new FormData(form);
 
+
                 $.ajax({
                     url: "../meet/meet_creation_back.php",
                     method: 'POST',

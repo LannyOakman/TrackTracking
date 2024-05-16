@@ -34,17 +34,27 @@
         exit;
     }
     
-    $response_str = fetchValue($conn, 'user_details', 'FirstName', 'id_username', $coach);
-    $response_str = $response_str . ';';
+    $coach_name = fetchValue($conn, 'user_details', 'FirstName', 'id_username', $coach);
+    
+    $response_str .= $coach_name . ';';
+
+    /*
+    
+
+    A better way to convert a 2d array to string so I can use it on the front end?
+
+
+    */
+
 
     foreach ($result as $item){
-        $response_str = $response_str . $item[0] . ',';
+        $response_str .= $item[0] . ',';
     }
     $response_str = substr($response_str, 0, -1);
-    $response_str = $response_str . ';';
+    $response_str .= ';';
 
     foreach ($result as $item){
-        $response_str = $response_str . $item[1] . ',';
+        $response_str .= $item[1] . ',';
     }
     $response_str = substr($response_str, 0, -1);
 

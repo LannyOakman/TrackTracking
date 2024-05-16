@@ -4,6 +4,11 @@
     include '../Functions/existsInTableColumn.php';
     $selected_event = $_POST['event_select_overall_rankings'];
     $category = fetchValue($conn, 'event_list', 'category', 'id_event', $selected_event);
+    
+    
+    //Ask Ian how to do case structures in sql that would work for this situation omg
+    
+    
     if($category == 'field'){
         $sql =
         "SELECT
@@ -92,6 +97,9 @@
     ";
 
     $result = $conn -> query($sql) -> fetch_all();
+
+    //  I didn't end up using the table you talked about and used
+    //  bootstrap for formatting.
 
     foreach($result as $row){
         $html_str .= "<tr>";

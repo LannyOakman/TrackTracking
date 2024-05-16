@@ -4,37 +4,29 @@
     $team_id = $_POST['record_performance_team_id'];
     $athlete = $_POST['team_athlete_select'];
 
-    $sql="
-    SELECT
-        id_affiliation_user
-    FROM
-        affiliation_user
-    WHERE
-        id_team = '$team_id'
-    AND
-        id_username = '$athlete'
-    ";
-
-    $result = $conn -> query($sql)  -> fetch_all();
-    if(!$result){
-        exit;
-    }
-    $id_affiliation_user = $result[0][0];
-
-    $sql="
-    SELECT DISTINCT
+    $sql =
+    "SELECT distinct
         meet.meet_name, meet.id_meet
     FROM
+        affiliation_user
+    JOIN
         meet_user_signup
-    INNER JOIN
+    ON
+        affiliation_user.id_affiliation_user = meet_user_signup.id_affiliation_user
+    JOIN
         meet
     ON
         meet_user_signup.id_meet = meet.id_meet
-	WHERE
-        id_affiliation_user = $id_affiliation_user;
-    ";
+    WHERE
+        affiliation_user.id_team = '$team_id'
+    AND
+        affiliation_user.id_username = '$athlete'";
 
     $result = $conn -> query($sql)  -> fetch_all();
+
+    if(!$result){
+        exit;
+    }
 
     $meet_name_list = [];
     $meet_id_list = [];

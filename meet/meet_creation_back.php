@@ -28,6 +28,14 @@
 
     $num = $conn -> query($sql) -> fetch_all();
 
+
+    /*
+    
+    Better way to return an error? Should I have responses stored somewhere else so I can
+    just go to one place and edit responses? How do I do that?
+    
+    */ 
+
     if (!$num){
         $response_str = $response_str . 'coach not found, ';
     }

@@ -9,16 +9,60 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../Other/style.css">
     <?php
+    include '../Functions/ajaxForm.php';
     include '../Functions/eventList.php';
     include '../Functions/listMeet.php';
     ?>
     <script>
+/*
+
+
+This is mildly horrific. I'm thinking I could have made a js function to simplify
+this all a lot. Something like:
+
+    ajaxFunction(successFunction()){
+            $.ajax({
+        url: "../team/get_athletes.php",
+        method: 'POST',
+        data: form_data,
+        processData: false,
+        contentType: false,
+        success: function(response){
+        },
+        error: function(xhr, status, error){
+            alert('Form not successful');
+            console.error(error);
+        }
+    }
+
+But that didn't end up working how I thought it would. There's just a lost of reused
+ajax stuff and it's kind of annoying.
+
+
+*/
+
+function ajaxFunction(form_data, successFunction){
+        $.ajax({
+        url: "../team/get_athletes.php",
+        method: 'POST',
+        data: form_data,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            successFunction(response);
+        },
+        error: function(xhr, status, error){
+            alert('Form not successful');
+            console.error(error);
+        }
+    })
+}
+
+
         $(function(){
             $('#submit_login_manage').click(function(){
-
                 let form = document.getElementById('manage_team_login_form');
                 let form_data = new FormData(form);
-
                 $.ajax({
                     url: "../team/coach_login_back.php",
                     method: 'POST',
@@ -50,10 +94,16 @@
             });
         });
 
+
         $(function(){
             $('#submit_team_select').click(function(){
+                if ($('#team_select').val() == null){
+                    $('.return_text').text('Please select a team.');
+                    return;
+                }
+                $('.return_text').text('');
                 $('#team_selection').hide();
-                $('#manage_drop_add').show();
+                $('#manage_drop_add').show();                
                 let form = document.getElementById('team_selection_form');
                 let form_data = new FormData(form);
                 $.ajax({
@@ -220,11 +270,12 @@
 
         $(function(){
             $('#drop_submit').click(function(){
-                // $('#drop_user').hide();
                 let team_id = $('#team_select').val();
                 $('#team_id_drop_user').val(team_id);
+
                 let form = document.getElementById('drop_user_form');
                 let form_data = new FormData(form);
+
                 $.ajax({
                     url: "../team/drop_user.php",
                     method: 'POST',
@@ -450,11 +501,11 @@
         </div>
         <div class="two_column">
         <?php
-            foreach(EVENT_LIST as $event){
+            foreach($EVENT_LIST as $event){
                 echo("
                 <div class='checkbox_with_label'>
-                <input type='checkbox' name='$event' id='$event' value ='$event'>
-                <label for='$event' class='event_checkbox'>$event</label>
+                <input type='checkbox' name='$event[0]' id='$event[0]' value ='$event[0]'>
+                <label for='$event[0]' class='event_checkbox'>$event[1]</label>
                 </div>
                 ");}
         ?>

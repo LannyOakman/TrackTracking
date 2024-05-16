@@ -52,22 +52,23 @@
         
         $result = $conn -> query($sql) -> fetch_all();
 
-        if ($result){
-            $sql ="
-            UPDATE
-                affiliation_user
-            SET
-                role = '$role'
-            WHERE
-                id_username = '$user_id'
-            AND
-                id_team = '$team_id';
-            ";
-            $result = $conn -> query($sql);
-        }
-        else{
+        if (!$result){
             insertIntoTable($conn, 'affiliation_user', 'NULL', $team_id, $user_id, $role);
+            exit;
         }
+
+        $sql ="
+        UPDATE
+            affiliation_user
+        SET
+            role = '$role'
+        WHERE
+            id_username = '$user_id'
+        AND
+            id_team = '$team_id';
+        ";
+
+        $conn -> query($sql);
         
         echo 'success';
 ?>

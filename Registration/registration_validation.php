@@ -2,6 +2,14 @@
     include '../Other/sql_connection.php';
     include '../Functions/existsInTableColumn.php';
     include '../Functions/insertIntoTable.php';
+    
+    /*
+
+        A better way to cycle through posts? I want to still have
+        a variable attatched to each post so I can use it, but all
+        the methods I have found cycle through?
+
+    */
     $username = $_POST["username"];
     $password = $_POST["password"];
     $name_first =$_POST["name_first"];
@@ -14,16 +22,18 @@
 
     $errors = '';
 
-    if (strlen($phone) != 12){
-        $errors = $errors . 'please use phone number format "XXX-XXX-XXXX, ';
+    $phone = preg_replace("/[^0-9]/", '', $phone);
+
+    if (strlen($phone) != 10){
+        $errors .= 'please use phone number format "XXX-XXX-XXXX, ';
     }
 
     if(strlen((string)$graduation) != 4){
-        $errors = $errors . 'please use form XXXX for graduation year, ';
+        $errors .= 'please use form XXXX for graduation year, ';
     }
 
     if(existsInTableColumn($conn, 'user_details', 'id_username', $username)){
-        $errors = $errors . 'username already in use, ';
+        $errors .= 'username already in use, ';
     }
     
     if (!($errors == '')){

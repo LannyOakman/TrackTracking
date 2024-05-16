@@ -23,6 +23,11 @@
                     contentType: false,
                     success: function(response){
                         $('#review_meet_return_text').text('');
+                        
+                        /*
+                            This is really jank. A better way for error handeling?
+                        */
+                        
                         if(response.startsWith('No')){
                             $('#review_meet_return_text').text(response);
                             return;
