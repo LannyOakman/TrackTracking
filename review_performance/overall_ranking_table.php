@@ -80,7 +80,7 @@
 
 
     $html_str ="
-    <table id='overall_ranking_table'>
+    <table id='overall_ranking_table' class='table'>
         <tr>
             <th>Performance</th>
             <th>First Name</th>

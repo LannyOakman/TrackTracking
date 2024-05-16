@@ -50,7 +50,7 @@
             event_list.id_event;
         ";
         $html_str ="
-        <table id='meet_review_table'>
+        <table id='meet_review_table' class='table'>
             <tr>
                 <th>Event</th>
                 <th>Performance 1</th>
@@ -94,7 +94,7 @@
             event_list.id_event;
         ";
         $html_str ="
-        <table id='meet_review_table'>
+        <table id='meet_review_table' class='table'>
             <tr>
                 <th>Event</th>
                 <th>First Name</th>
@@ -118,7 +118,7 @@
     $html_str .= '</table>';
 
     if(!str_ends_with($html_str, '</tr></table>')){
-        $html_str ='<h4>No Athletes Registered</h4>';
+        $html_str ='No Registered Athletes';
     }
 
     echo $html_str;

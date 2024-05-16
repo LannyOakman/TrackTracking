@@ -14,7 +14,9 @@
         ON
             affiliation_user.id_username = user_details.id_username
         WHERE
-            id_team = $team_id;
+            id_team = $team_id
+        AND
+            role != 'removed';
     ";
     
     $result = $conn -> query($sql) -> fetch_all();

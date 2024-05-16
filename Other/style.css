@@ -1,4 +1,85 @@
-h1 {
+.form_wrapper{
+    padding: 2%;
+    width: 50%;
+    margin: 2% auto;
+    border: 1px solid black;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.inline_flexbox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 3%;
+}
+
+.inline_flexbox button, a{
+    margin: 2% 2%;
+    width: 40%;
+}
+
+.inline_flexbox h4{
+    margin: 0%;
+}
+
+.form-floating{
+    margin-right: 2%;
+    width: 45%;
+}
+
+.form-select{
+    width: 45%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.bottom_btn_wrapper a, .bottom_btn_wrapper button{
+    width: 30%;
+    margin: 2%
+}
+
+.bottom_btn_wrapper{
+    width: auto;
+    margin: auto;
+}
+
+.input_wrapper{
+    display: flexbox;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.header h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 3em;
+    font-size: 3.5em;
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+.checkbox_with_label{
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox_with_label label{
+    width: 70%;
+}
+
+.two_column{
+    column-count: 2;
+    justify-content: center;
+}
+
+.footer_table{
+    /* width: 80%; */
+    width: 10em;
+    margin: auto;
+}
+
+.return_text{
+    text-align: center;
+    font-weight: bold;
+    color: red;
 }

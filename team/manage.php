@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Team</title>
-    <link rel="stylesheet" href="../Registration/styles.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Other/style.css">
     <?php
     include '../Functions/eventList.php';
     include '../Functions/listMeet.php';
@@ -26,12 +27,12 @@
                     contentType: false,
                     success: function(response){
                         if (response.includes('Error: ')){
-                            $('#return_text_manage_login').text(response);
+                            $('.return_text').text(response);
                         }else{
                             let team_arr = response.split(';');
                             let team_id = team_arr[1].split(',');
                             let team_name = team_arr[2].split(',');
-                            $('#return_text_manage_login').text('Hello ' + team_arr[0] + '!');
+                            $('.return_text').text('Hello ' + team_arr[0] + '!');
 
                             for(let i = 0; i < team_arr.length; i++){
                                 $('#team_select').append(new Option(team_name[i], team_id[i]))
@@ -85,7 +86,7 @@
                 $('#event_form_submission').show();
 
                 let team_name = $('#team_select').children('option').filter(':selected').text();
-                $('#return_text_manage_login').text('');
+                $('.return_text').text('');
                 $('#manage_h1').text('Select Events');
                 // $('#team_athlete_select_label').text('Select member from ' + team_name + ':');
                 let form = document.getElementById('team_selection_form');
@@ -130,11 +131,11 @@
                     contentType: false,
                     success: function(response){
                     if (response != ""){
-                        $('#return_text_manage_login').text(response);
+                        $('.return_text').text(response);
                         
                     }else{
-                        $('#event_form_submission').hide();
-                        $('#return_text_manage_login').text('Success');
+                        // $('#event_form_submission').hide();
+                        $('.return_text').text('Success');
                     }
                     },
                     error: function(xhr, status, error){
@@ -176,7 +177,7 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-                        $('#return_text_manage_login').text(response);
+                        $('.return_text').text(response);
                     },
                     error: function(xhr, status, error){
                         alert('Form not successful');
@@ -219,7 +220,7 @@
 
         $(function(){
             $('#drop_submit').click(function(){
-                $('#drop_user').hide();
+                // $('#drop_user').hide();
                 let team_id = $('#team_select').val();
                 $('#team_id_drop_user').val(team_id);
                 let form = document.getElementById('drop_user_form');
@@ -231,7 +232,7 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-                        $('#return_text_manage_login').text(response);
+                        $('.return_text').text(response);
                     },
                     error: function(xhr, status, error){
                         alert('Form not successful');
@@ -246,7 +247,8 @@
                 $('#manage_h1').text('Record Performance');
                 $('#manage_drop_add').hide();
                 $('#record_performance_athlete_select').html($('#team_athlete_select_hidden').html());
-                $('#record_performance_athlete_select').append(new Option('Select an Option', null,true, true));
+                $('#record_performance_athlete_select').append(new Option('Select Athlete', null, true, true));
+                $('#record_performance_athlete_select option[value="null"]').prop('disabled', true);
                 $('#record_performance').show();
             })
         })
@@ -270,7 +272,8 @@
                             let arr = response.split(';');
                             let meet_name_list = arr[0].split(',');
                             let meet_id_list = arr[1].split(',');
-                            $('#record_performance_meet_select').append(new Option('Select an Option', null, true));
+                            $('#record_performance_meet_select').append(new Option('Select Meet', null, true));
+                            $('#record_performance_meet_select option[value="null"]').prop('disabled', true);
                             for(let i = 0; i < meet_id_list.length; i++){
                                 $('#record_performance_meet_select').append(new Option(meet_name_list[i], meet_id_list[i]));
                             }
@@ -303,7 +306,8 @@
                         arr = response.split(';');
                         event_id_list = arr[0].split(',');
                         event_name_list = arr[1].split(',');
-                        $('#record_performance_event_select').append(new Option('Select an Option', null, true));
+                        $('#record_performance_event_select').append(new Option('Select Event', null, true));
+                        $('#record_performance_event_select option[value="null"]').prop('disabled', true);
                         for(let i = 0; i < event_id_list.length; i++){
                             $('#record_performance_event_select').append(new Option(event_name_list[i], event_id_list[i]));
                         }
@@ -330,7 +334,7 @@
                         $('#performance_input').show();
                         $('#event_category').val(response);
                         if (response == 'field'){
-                            $('#performance_type_label').text('Enter in meters (XX.XX): ');
+                            $('#performance_type_label').text('Enter Distance (XX.XX m): ');
                             $('#running_input').hide();
                             $('#field_input').show();
                         }else{
@@ -358,7 +362,7 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-                        $('#return_text_manage_login').text(response);
+                        $('.return_text').text(response);
                         if (response === 'success'){
                             $('#running_input').hide();
                             $('#field_input').hide();
@@ -374,118 +378,205 @@
     </script>
 </head>
 <body>
-    <h1 id="manage_h1">Manage Team</h1>
+    
 
-    <div id="manage_team_login">
+    <div id="manage_team_login" class="form_wrapper">
+    <div class="header">
+    <h1>Manage Team</h1>        
+    </div>
         <form id="manage_team_login_form">
-        <input type="text" name="coach_username" placeholder="Coach Username" class="manage_team_login">
+            <div class="inline_flexbox">
+            <div class="form-floating mb-3">
+                <input type="text" name="coach_username" placeholder="Coach Username" class="form-control" id="coach_username_manage">
+                <label for="coach_username_manage">Coach Username</label>
+            </div>
+            </div>
         </form>
-        <button id="submit_login_manage" class="btn btn-outline-primary">Submit</button>     
-    </div>
-
-    <p id="return_text_manage_login"></p>
-
-    <div id='team_selection' style="display:none">
-        <form id="team_selection_form">
-        <label for="team_select">Select Team</label>
-        <select name="team_select" id="team_select">
-        </select>
-        </form>
-        <button id='submit_team_select'>Submit</button>
-    </div>
-
-    <div id='manage_drop_add' style="display:none">
-        <button id='event_signup'>Event Sign-up</button>
-        <button id='manage_members'>Manage Members</button>
-        <button id='event_performance'>Record Performance</button>    
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <button id="submit_login_manage" class="btn btn-primary">Login</button>
+        </div>
     </div>
     
-    <div id="event_form_submission" style="display:none">
+
+    <div id='team_selection' style="display:none" class="form_wrapper">
+    <div class="header">
+    <h1>Select Team</h1>      
+    </div>    
+    <form id="team_selection_form">
+        <div class="inline_flexbox">
+                <select name="team_select" id="team_select" class="form-select">
+                    <option value="" selected disabled hidden>Select Team</option>
+                </select>
+        </div>
+        </form>
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <button id='submit_team_select' class="btn btn-primary">Submit</button>
+        </div>
+
+    </div>
+
+    <div id='manage_drop_add' style="display:none" class="form_wrapper">
+    <div class="header">
+        <h1>Manage Team</h1>
+    </div>    
+        <div class="inline_flexbox">
+            <button id='event_signup' class="btn btn-secondary">Event Sign-up</button>
+            <button id='manage_members' class="btn btn-secondary">Manage Members</button>
+            <button id='event_performance' class="btn btn-secondary">Record Performance</button>
+        </div>
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>  
+        </div>
+    </div>
+    
+    <div id="event_form_submission" style="display:none" class="form_wrapper">
     <form id='event_form'>
+    <div class="header">
+        <h1>Event Registration</h1> 
+    </div>
+        <div class="inline_flexbox">
         <input type="text" id='team_id_event_form' style="display:none" name="team_id_event_form">
-        <label for="team_athlete_select" id="team_athlete_select_label">Select athlete: </label>
-        <select name="team_athlete_select" id="team_athlete_select"></select>
-        <br>
-        <label for="manage_meet_select" id="manage_meet_select_label">Select meet: </label>
-        <select name="manage_meet_select" id="manage_meet_select">
+        <select name="team_athlete_select" id="team_athlete_select" class="form-select">
+            <option value="" selected disabled hidden>Select Athlete</option>
+        </select>
+        <select name="manage_meet_select" id="manage_meet_select" class="form-select">
+            <option value="" selected disabled hidden>Select Meet</option>
             <?php
             listMeet();
             ?>
         </select>
-        <br>
+        </div>
+        <div class="two_column">
         <?php
             foreach(EVENT_LIST as $event){
                 echo("
+                <div class='checkbox_with_label'>
                 <input type='checkbox' name='$event' id='$event' value ='$event'>
-                <label for='$event'>$event</label>
+                <label for='$event' class='event_checkbox'>$event</label>
+                </div>
                 ");}
         ?>
+        </div>
     </form>
-        <button id='submit_event_form'>Submit</button>
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <button id='submit_event_form' class="btn btn-primary">Submit</button>            
+        </div>
     </div>
 
-    <div id='add_drop' style='display:none'>
-        <button id='add_user_btn'>Add</button>
-        <button id='drop_user_btn'>Drop</button>
+    <div id='add_drop' style='display:none' class="form_wrapper">
+    <div class="header">
+        <h1>Add/Drop</h1> 
+    </div>
+    <div class="inline_flexbox">  
+        <button id='add_user_btn' class="btn btn-secondary">Add</button>
+        <button id='drop_user_btn' class="btn btn-secondary">Drop</button>
+    </div>
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+        </div>
     </div>
 
-    <div id='add_user' style="display:none">
+
+    <div id='add_user' style="display:none" class="form_wrapper">
+        <div class="header">
+            <h1>Add</h1> 
+        </div>
         <form id="add_user_form">
-            <label for="add_user_input">Add member: </label>
-            <input type="text" id="add_user_input" name="add_user_input" placeholder="Member Username">
+            <div class="inline_flexbox">
+                <div class="form-floating mb-3">
+                <input type="text" id="add_user_input" name="add_user_input" placeholder="Member Username" class="form-control">
+                <label for="add_user_input">Add member: </label>
+                </div>
+            </div>
+
             <input type="text" style="display:none" id=team_id_add_user name=team_id_add_user>
-            <h4>Added member's role: </h4>
-            <label for="coach">Coach:</label>
-            <input type="radio" value="coach" name="role" id="coach_r">
-            <label for="athlete">Athlete:</label>
-            <input type="radio" value="athlete" name="role" id="athlete_r">
-        </form>
-        <button id="add_submit">Submit</button>
+            <div class="inline_flexbox">
+                <h5>Added member's role:</h5>
+                <div class="form-check">
+                <input type="radio" value="coach" name="role" id="coach_r">
+                <label for="coach_r">Coach:</label>
+                <input type="radio" value="athlete" name="role" id="athlete_r">
+                <label for="athlete_r">Athlete:</label>
+                </div> 
+            </div>
+            </form>
+            <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <button id="add_submit" class="btn btn-primary">Submit</button>
+            </div>
     </div>
 
-    <div id='drop_user' style='display:none'>
+    <div id='drop_user' style='display:none' class="form_wrapper">
+    <div class="header">
+            <h1>Drop</h1> 
+    </div>
         <form id='drop_user_form'>
-            <label for="drop_member_select">Drop member:</label>
-            <select name="drop_member_select" id="drop_member_select"></select>
+            <div class="inline_flexbox">
+            <select name="drop_member_select" id="drop_member_select" class="form-select">
+                <option value="" selected disabled hidden>Select Member</option>
+            </select>
+            </div>
             <input type="text" style="display:none" id=team_id_drop_user name=team_id_drop_user>
         </form>
-        <button id="drop_submit">Submit</button>
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>    
+            <button id="drop_submit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
     
-    <div id='record_performance' style="display:none">
+    <div id='record_performance' style="display:none" class="form_wrapper">
+    <div class="header">
+            <h1>Record Performance</h1> 
+    </div>
     <form id="record_performance_form">
-        <label for="record_performance_athlete_select">Select Athlete</label>
-        <select name="team_athlete_select" id="record_performance_athlete_select"></select>
-        <br>
-        <label for="record_performance_meet_select">Select Meet</label>
-        <select name="record_performance_meet_select" id="record_performance_meet_select"></select>
-        <br>
-        <label for="record_performance_event_select">Select Event</label>
-        <select name="record_performance_event" id="record_performance_event_select"></select>
+        <div class="inline_flexbox">
+        <select name="team_athlete_select" id="record_performance_athlete_select" class="form-select"></select>
+        <select name="record_performance_meet_select" id="record_performance_meet_select" class="form-select"></select>
+        <select name="record_performance_event" id="record_performance_event_select" class="form-select"></select>
         <input type="text" id="record_performance_team_id"name="record_performance_team_id" style="display:none">
         <input type="text" id="event_category" name="event_category" style="display:none">
-        
+        </div>
         <div id='performance_input' style="display:none">
-        <h4 id="performance_type_label"></h5>
-        <div id='running_input'>
-            <input type="text" id="user_time_input" name="user_time_input" placeholder="XX:XX.XX">
+        <div class="inline_flexbox">
+            <h4 id="performance_type_label"></h4>
+        </div>
+        
+        <div id='running_input' class="inline_flexbox">
+            <div class="form-floating mb-3">
+                <input type="text" id="user_time_input" name="user_time_input" placeholder="XX:XX.XX" class="form-control">
+                <label for="user_time_input">XX:XX.XX</label>
+            </div>    
         </div>
 
-        <div id='field_input'>
-            <input type="text" id="user_field_input_1" name="user_field_input_1" placeholder="XX.XX">
-            <input type="text" id="user_field_input_2" name="user_field_input_2" placeholder="XX.XX">
-            <input type="text" id="user_field_input_3" name="user_field_input_3" placeholder="XX.XX">
+        <div id='field_input' class="inline_flexbox">
+            <div class="form-floating mb-3">
+            <input type="text" id="user_field_input_1" name="user_field_input_1" placeholder="XX.XX" class="form-control">
+            <label for="user_field_input_1">XX.XX</label>                
+            </div>
+            <div class="form-floating mb-3">
+            <input type="text" id="user_field_input_2" name="user_field_input_2" placeholder="XX.XX" class="form-control">
+            <label for="user_field_input_2">XX.XX</label>
+            </div>
+            <div class="form-floating mb-3">
+            <input type="text" id="user_field_input_3" name="user_field_input_3" placeholder="XX.XX" class="form-control">
+            <label for="user_field_input_3">XX.XX</label>
+            </div>
         </div>
         </div>
     </form>
-    <button id='performance_submit'>Submit</button>
-    </div>
-    
+        <div class="bottom_btn_wrapper inline_flexbox">
+            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <button id='performance_submit' class="btn btn-primary">Submit</button>            
+        </div>
 
-    
-    <a href="../Front/front.php" class="back_btn">
-            <button>Back</button>
-    </a>
+    </div>
     <select name="team_athlete_select" id="team_athlete_select_hidden" style="display:none"></select>
+<script>
+    let return_text_append = "<p class='return_text'><p>";
+    $('.form_wrapper').append(return_text_append);
+</script>
 </body>
 </html>
