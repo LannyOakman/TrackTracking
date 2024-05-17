@@ -2,6 +2,21 @@
     include '../Other/sql_connection.php';
     include '../Functions/insertIntoTable.php';
 
+    if(!isset($_POST['team_athlete_select'])){
+        echo "Please select an athlete";
+        exit;
+    }
+
+    if(!isset($_POST['record_performance_meet_select'])){
+        echo "Please select a meet";
+        exit;
+    }
+
+    if(!isset($_POST['record_performance_event'])){
+        echo "Please select an event";
+        exit;
+    }
+
     $athlete_id = $_POST['team_athlete_select'];
     $team_id = $_POST['record_performance_team_id'];
     $meet_id = $_POST['record_performance_meet_select'];
@@ -63,14 +78,14 @@ $sql = "
 
     if(!($event_type == 'field')){
         if ($performance_run == ''){
-            echo 'Please fill out all fields';
+            echo 'Please fill out performance field';
             exit;
         }
         insertIntoTable($conn, 'performances', 'NULL', $id_meet_user_signup, $performance_run, 'NULL', 'NULL');
     }
     else{
         if($performance_field1 == '' || $performance_field2 == '' || $performance_field3 == ''){
-            echo 'Please fill out all fields';
+            echo 'Please fill out all performance fields';
             exit;
         }
         insertIntoTable($conn, 'performances', 'NULL', $id_meet_user_signup, $performance_field1, $performance_field2, $performance_field3);

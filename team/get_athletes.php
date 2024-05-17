@@ -29,6 +29,7 @@
         array_push($last_name,$row[3]);
     }
     $arr_str = implode(',', $id_user) . ';' . implode(',', $first_name) . ';' . implode(',', $last_name);
-    
-    echo $arr_str;
+    if ($arr_str != ';;'){
+        echo $arr_str;
+    }
 ?>

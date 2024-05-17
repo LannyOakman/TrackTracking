@@ -2,6 +2,7 @@
     include '../Other/sql_connection.php';
     include '../Functions/existsInTableColumn.php';
     include '../Functions/insertIntoTable.php';
+    include '../Functions/cleanStr.php';
     
     /*
 
@@ -10,35 +11,39 @@
         the methods I have found cycle through?
 
     */
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $name_first =$_POST["name_first"];
-    $name_last = $_POST["name_last"];
-    $dob = $_POST["dob"];
-    $phone = $_POST["phone"];
-    $city = $_POST["city"];
-    $state = $_POST["state"];
-    $graduation = $_POST["graduation"];
+    $username = cleanStr($_POST["username"]);
+    $password = trim($_POST["password"]);
+    $name_first = cleanStr($_POST["name_first"]);
+    $name_last = cleanStr($_POST["name_last"]);
+    $dob = cleanStr($_POST["dob"]);
+    $phone = cleanStr($_POST["phone"]);
+    $city = cleanStr($_POST["city"]);
+    $state = cleanStr($_POST["state"]);
+    $graduation = cleanStr($_POST["graduation"]);
 
-    $errors = '';
+    if($username != $_POST["username"]){
+        echo $username;
+    }
 
     $phone = preg_replace("/[^0-9]/", '', $phone);
 
+    if($username == "" || $name_first == "" || $name_last=="" || $dob=="" || $city=="" || $state==""){
+        echo 'Please fill out all fields';
+        exit;
+    }
+
     if (strlen($phone) != 10){
-        $errors .= 'please use phone number format "XXX-XXX-XXXX, ';
+        echo 'Please use phone number format "XXX-XXX-XXXX';
+        exit;
     }
 
     if(strlen((string)$graduation) != 4){
-        $errors .= 'please use form XXXX for graduation year, ';
+        echo 'Please use format XXXX for graduation year';
+        exit;
     }
 
     if(existsInTableColumn($conn, 'user_details', 'id_username', $username)){
-        $errors .= 'username already in use, ';
-    }
-    
-    if (!($errors == '')){
-        $errors = substr($errors, 0, -2) . '.';
-        echo $errors;
+        echo 'Username already in use';
         exit;
     }
 

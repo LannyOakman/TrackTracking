@@ -88,7 +88,7 @@
         </div>
 </div>
     </form>
-    <div id="div004" class="bottom_btn_wrapper inline_flexbox">
+    <div class="bottom_btn_wrapper inline_flexbox">
         <a href="../Front/front.php" class="btn btn-primary">Back</a>
         <button id="submission_btn" class="btn btn-primary">Submit</button>
     </div>

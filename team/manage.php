@@ -309,7 +309,9 @@ function ajaxFunction(form_data, successFunction){
             $('#event_performance').click(function(){
                 $('#manage_h1').text('Record Performance');
                 $('#manage_drop_add').hide();
+                
                 $('#record_performance_athlete_select').html($('#team_athlete_select_hidden').html());
+
                 $('#record_performance_athlete_select').append(new Option('Select Athlete', null, true, true));
                 $('#record_performance_athlete_select option[value="null"]').prop('disabled', true).hide();
                 $('#record_performance').show();
