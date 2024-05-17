@@ -311,10 +311,12 @@ function ajaxFunction(form_data, successFunction){
                 $('#manage_drop_add').hide();
                 $('#record_performance_athlete_select').html($('#team_athlete_select_hidden').html());
                 $('#record_performance_athlete_select').append(new Option('Select Athlete', null, true, true));
-                $('#record_performance_athlete_select option[value="null"]').prop('disabled', true);
+                $('#record_performance_athlete_select option[value="null"]').prop('disabled', true).hide();
                 $('#record_performance').show();
+                
             })
         })
+        
 
         $(function(){
             $('#record_performance_athlete_select').change(function(){
@@ -336,7 +338,7 @@ function ajaxFunction(form_data, successFunction){
                             let meet_name_list = arr[0].split(',');
                             let meet_id_list = arr[1].split(',');
                             $('#record_performance_meet_select').append(new Option('Select Meet', null, true));
-                            $('#record_performance_meet_select option[value="null"]').prop('disabled', true);
+                            $('#record_performance_meet_select option[value="null"]').prop('disabled', true).hide();
                             for(let i = 0; i < meet_id_list.length; i++){
                                 $('#record_performance_meet_select').append(new Option(meet_name_list[i], meet_id_list[i]));
                             }
@@ -370,7 +372,7 @@ function ajaxFunction(form_data, successFunction){
                         event_id_list = arr[0].split(',');
                         event_name_list = arr[1].split(',');
                         $('#record_performance_event_select').append(new Option('Select Event', null, true));
-                        $('#record_performance_event_select option[value="null"]').prop('disabled', true);
+                        $('#record_performance_event_select option[value="null"]').prop('disabled', true).hide();
                         for(let i = 0; i < event_id_list.length; i++){
                             $('#record_performance_event_select').append(new Option(event_name_list[i], event_id_list[i]));
                         }
@@ -453,6 +455,7 @@ function ajaxFunction(form_data, successFunction){
                 $('#event_form_submission').hide();
                 $('#manage_drop_add').show();
                 $('.return_text').text('');
+                $('#team_athlete_select').find('option').remove().end();
             })
         })
 
@@ -475,8 +478,9 @@ function ajaxFunction(form_data, successFunction){
         $(function(){
             $('#back_drop_user').click(function(){
                 $('#drop_user').hide();
-                $('#add_drop').show();
+                $('#drop_member_select').find('option').remove().end();
                 $('.return_text').text('');
+                $('#add_drop').show();
             })
         })
         
