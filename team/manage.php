@@ -20,7 +20,7 @@
 This is mildly horrific. I'm thinking I could have made a js function to simplify
 this all a lot. Something like:
 
-    ajaxFunction(successFunction()){
+    function ajaxFunction(successFunction){
             $.ajax({
         url: "../team/get_athletes.php",
         method: 'POST',
@@ -28,12 +28,24 @@ this all a lot. Something like:
         processData: false,
         contentType: false,
         success: function(response){
+            successFunction(response)
         },
         error: function(xhr, status, error){
             alert('Form not successful');
             console.error(error);
         }
     }
+    ...
+
+    $(function(){
+        $('#some_id').click(function(){
+            ...
+            ajaxFunction(function(){
+                ...
+            })
+        })
+    })
+
 
 But that didn't end up working how I thought it would. There's just a lost of reused
 ajax stuff and it's kind of annoying.
@@ -58,7 +70,6 @@ function ajaxFunction(form_data, successFunction){
     })
 }
 
-
         $(function(){
             $('#submit_login_manage').click(function(){
                 let form = document.getElementById('manage_team_login_form');
@@ -77,6 +88,9 @@ function ajaxFunction(form_data, successFunction){
                             let team_id = team_arr[1].split(',');
                             let team_name = team_arr[2].split(',');
                             $('.return_text').text('Hello ' + team_arr[0] + '!');
+
+                            $('#team_select').append(new Option('Select Team', null, true, true));
+                            $('#team_select option[value="null"]').prop('disabled', true).hide()
 
                             for(let i = 0; i < team_arr.length; i++){
                                 $('#team_select').append(new Option(team_name[i], team_id[i]))
@@ -138,7 +152,6 @@ function ajaxFunction(form_data, successFunction){
                 let team_name = $('#team_select').children('option').filter(':selected').text();
                 $('.return_text').text('');
                 $('#manage_h1').text('Select Events');
-                // $('#team_athlete_select_label').text('Select member from ' + team_name + ':');
                 let form = document.getElementById('team_selection_form');
                 let form_data = new FormData(form);
 
@@ -184,7 +197,6 @@ function ajaxFunction(form_data, successFunction){
                         $('.return_text').text(response);
                         
                     }else{
-                        // $('#event_form_submission').hide();
                         $('.return_text').text('Success');
                     }
                     },
@@ -426,6 +438,55 @@ function ajaxFunction(form_data, successFunction){
                 })
             })
         })
+
+        $(function(){
+            $('#back_team_selection').click(function(){
+                $('#team_selection').hide();
+                $('#team_select').find('option').remove().end(1);
+                $('.return_text').text('');
+                $('#manage_team_login').show();
+            })
+        })
+
+        $(function(){
+            $('#back_event_form_submission').click(function(){
+                $('#event_form_submission').hide();
+                $('#manage_drop_add').show();
+                $('.return_text').text('');
+            })
+        })
+
+        $(function(){
+            $('#back_add_drop').click(function(){
+                $('#add_drop').hide();
+                $('#manage_drop_add').show();
+                $('.return_text').text('');
+            })
+        })
+
+        $(function(){
+            $('#back_add_user').click(function(){
+                $('#add_user').hide();
+                $('#add_drop').show();
+                $('.return_text').text('');
+            })
+        })
+
+        $(function(){
+            $('#back_drop_user').click(function(){
+                $('#drop_user').hide();
+                $('#add_drop').show();
+                $('.return_text').text('');
+            })
+        })
+        
+        $(function(){
+            $('#back_record_performance').click(function(){
+                $('#record_performance').hide();
+                $('#manage_drop_add').show();
+                $('.return_text').text('');
+            })
+        })
     </script>
 </head>
 <body>
@@ -462,10 +523,9 @@ function ajaxFunction(form_data, successFunction){
         </div>
         </form>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <a class="btn btn-primary" id="back_team_selection" >Back</a>
             <button id='submit_team_select' class="btn btn-primary">Submit</button>
         </div>
-
     </div>
 
     <div id='manage_drop_add' style="display:none" class="form_wrapper">
@@ -478,7 +538,7 @@ function ajaxFunction(form_data, successFunction){
             <button id='event_performance' class="btn btn-secondary">Record Performance</button>
         </div>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>  
+            <a class="btn btn-primary" href="../Front/front.php">Back</a>  
         </div>
     </div>
     
@@ -512,7 +572,7 @@ function ajaxFunction(form_data, successFunction){
         </div>
     </form>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <a class="btn btn-primary" id="back_event_form_submission">Back</a>
             <button id='submit_event_form' class="btn btn-primary">Submit</button>            
         </div>
     </div>
@@ -526,7 +586,7 @@ function ajaxFunction(form_data, successFunction){
         <button id='drop_user_btn' class="btn btn-secondary">Drop</button>
     </div>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <a class="btn btn-primary" id="back_add_drop">Back</a>
         </div>
     </div>
 
@@ -555,7 +615,7 @@ function ajaxFunction(form_data, successFunction){
             </div>
             </form>
             <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <a class="btn btn-primary" id="back_add_user">Back</a>
             <button id="add_submit" class="btn btn-primary">Submit</button>
             </div>
     </div>
@@ -573,7 +633,7 @@ function ajaxFunction(form_data, successFunction){
             <input type="text" style="display:none" id=team_id_drop_user name=team_id_drop_user>
         </form>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>    
+            <a class="btn btn-primary" id="back_drop_user">Back</a>    
             <button id="drop_submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
@@ -619,7 +679,7 @@ function ajaxFunction(form_data, successFunction){
         </div>
     </form>
         <div class="bottom_btn_wrapper inline_flexbox">
-            <a href="../Front/front.php" class="btn btn-primary">Back</a>
+            <a class="btn btn-primary" id="back_record_performance">Back</a>
             <button id='performance_submit' class="btn btn-primary">Submit</button>            
         </div>
 
